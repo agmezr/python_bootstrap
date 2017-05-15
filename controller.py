@@ -12,3 +12,6 @@ if log_format:
     handler.setFormatter(logging.Formatter(log_format))
 logger.setLevel(config.log.get('level', 'info').upper())
 logger.addHandler(handler)
+
+def decode(value):
+    return value
