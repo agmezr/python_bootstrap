@@ -1,6 +1,6 @@
 # Python bootstrap
 
-A simple bootstrap used as a base to start working on python projects quickly. The base of the project doesn't use any frameworks but for convenience I have included sqlalchemy and a test to ensure everything is ready to go.
+A simple python project used as a base to start working quickly. The base of the project doesn't use any frameworks but for convenience I have included sqlalchemy and a test to ensure everything is ready to go.
 
 ## How to use?
 

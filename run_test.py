@@ -8,4 +8,5 @@ print "Results for tests"
 
 row_format ="{:>10}" * 2
 for r, row in [(result, results[result] and "OK" or "Error" ) for result in results]:
+    logger.info("Result for %s: %s", r,row)
     print row_format.format(r, row)

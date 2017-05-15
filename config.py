@@ -5,5 +5,3 @@ log = {'file': './log/app.log',
        'level': 'debug',
        'limit': 1000000
        }
-
-#
