@@ -95,3 +95,13 @@ class Database:
         else:
             self.log('Could not initiate connection using the engine')
         return table
+
+    def database_disconnect(self, connection)
+        ''' Terminate a connection '''
+        try:
+            connection.close()
+        except exc.SQLAlchemyError as error:
+            self.log('Failed to terminate connection: {e}'.format(e=error))
+        except Exception as error:
+            self.log('Unexpected exception: {e}'.format(e=error))
+        return None
