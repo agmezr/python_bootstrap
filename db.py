@@ -57,11 +57,12 @@ class Database:
         finally:
             return engine
 
-    def database_connection(self):
+    def database_connection(self, engine=None):
         '''Start a connection to the database'''
         connection = None
         try:
-            engine = self.engine()
+            if not engine:
+                engine = self.engine()
             connection = engine.connect()
         except exc.SQLAlchemyError as error:
             self.log.error('Failed to start connection: {e}'.format(e=error))
