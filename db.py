@@ -1,5 +1,5 @@
 from sqlalchemy import exc, create_engine, MetaData, Table
-from controller import decode
+from controller import decode, logger
 import logging
 
 class Database:
@@ -78,7 +78,7 @@ class Database:
         table = None
         if not connection:
             connection = self.database_connection()
-        if connection and tablename: 
+        if connection and tablename:
             try:
                 meta = MetaData()
                 meta.reflect(bind=connection)
@@ -96,7 +96,7 @@ class Database:
             self.log('Could not initiate connection using the engine')
         return table
 
-    def database_disconnect(self, connection)
+    def database_disconnect(self, connection):
         ''' Terminate a connection '''
         try:
             connection.close()

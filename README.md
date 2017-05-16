@@ -19,3 +19,4 @@ Simply cloning the project allows to start working right away but assuming that 
 * python-setuptools
 * make
 * python-dev
+* python-psycopg2

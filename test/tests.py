@@ -1,11 +1,34 @@
 import os
 import config
 from controller import logger
-from database import test_sqlalchemy, test_sql_connection
+from db import Database
 
 
 def test_log():
     return os.path.exists(config.log['file'])
+
+def test_sqlalchemy():
+    ''' Checks if sqlalchemy can be imported and logs version'''
+    try:
+        import sqlalchemy
+    except Exception as e:
+        logger.error("Import error: %s", e)
+        return False
+    else:
+        from sqlalchemy import create_engine
+        version = sqlalchemy.__version__
+        logger.info("Sqlalchemy version: %s", version)
+        return True
+
+def test_sql_connection():
+    database = Database(config,logger)
+    try:
+        engine = database.database_engine()
+        connection = database.database_connection(engine)
+        return database.database_disconnect(connection) == None
+    except Exception as e:
+        logger.error("Unexpected exception: %s", e)
+        return False
 
 def run_tests():
     ''' Run tests and returns a dictionary with results '''
