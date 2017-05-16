@@ -11,3 +11,11 @@ Simply cloning the project allows to start working right away but assuming that 
 * `make build` will create the virtual environment with name specified on the make file and install the libraries specified on `requirements.txt`. By default the name of the folder is `venv` and the only library installed by pip will be sqlalchemy, please edit `requirements.txt` to suit your needs.
 
 * `make test` will activate the virtual environment and run the `run_test.py` script. The output of the script helps to ensure that sqlalchemy and the logger are working fine.
+
+## Requirements
+
+* Pip
+* Python 2
+* python-setuptools
+* make
+* python-dev
