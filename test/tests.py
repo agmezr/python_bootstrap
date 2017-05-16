@@ -3,6 +3,8 @@ import config
 from controller import logger
 from db import Database
 
+# Change this to a table on the database
+test_table = 'test_table'
 
 def test_log():
     return os.path.exists(config.log['file'])
@@ -22,13 +24,29 @@ def test_sqlalchemy():
 
 def test_sql_connection():
     database = Database(config,logger)
+    result = [False, False, False]
     try:
         engine = database.database_engine()
-        connection = database.database_connection(engine)
-        return database.database_disconnect(connection) == None
+        if engine == None:
+            return result
+        result[0] = True
+        connection = database.database_connect(engine)
+        if connection == None:
+            return result
+        result[1] = True
+        table = database.reflect_table(test_table, terminate=True, connection=connection)
+        if table == None:
+            return result
+        result[2] = True
+        logger.info(table.columns)
+        logger.info(table.primary_key)
+        database.database_disconnect(connection)
+        engine.dispose()
+
     except Exception as e:
-        logger.error("Unexpected exception: %s", e)
-        return False
+        logger.error("Unexpected exception on test: %s", e)
+
+    return result
 
 def run_tests():
     ''' Run tests and returns a dictionary with results '''
@@ -37,9 +55,11 @@ def run_tests():
     sqlalchemy_result = test_sqlalchemy()
 
     if sqlalchemy_result:
-        connection_result = test_sql_connection()
+        sql_result = test_sql_connection()
 
     return {'logger': log_result,
             'sqlalchemy': sqlalchemy_result,
-            'connection': connection_result
+            'engine': sql_result[0],
+            'connection': sql_result[1],
+            'reflect_table': sql_result[2]
             }

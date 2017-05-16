@@ -1,2 +1,3 @@
 psycopg2==2.7.1
 SQLAlchemy==1.1.9
+simple-crypt==4.1.7

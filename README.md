@@ -2,6 +2,10 @@
 
 A simple python project used as a base to start working quickly. The base of the project doesn't use any frameworks but for convenience I have included sqlalchemy and a test to ensure everything is ready to go.
 
+## Before you start
+
+If you plan to use sqlalchemy, you need to change the database dictionary in `config.py` file to suit your configuration.
+
 ## How to use?
 
 Simply cloning the project allows to start working right away but assuming that you use virtual environment (and you should!) the makefile helps you to setup the project. The commands that you can use for the makefile are:

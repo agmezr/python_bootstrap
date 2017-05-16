@@ -7,12 +7,20 @@ log = {
     'limit': 1000000
     }
 
-# database configuration
+# database configuration, change this if you plan to use sqlalchemy
 database = {
-    'username': '<USERNAME>',
+    'user': '<USERNAME>',
     'password': '<PASSWORD>',
+    'dbms':'<DBMS>',
+    'database':'<DATABASE>',
     'host': 'localhost',
     'port': 1234,
-    'database':'<DATABASE>',
-    'dbms':'<DBMS>'
+    'pool_size': 5,
+    'max_overflow': 0,
+    'pool_recycle': 2,
+    'isolation_level': 'READ_UNCOMMITED'
+}
+
+app = {
+    'key': 'mysecretkey1234'
 }
