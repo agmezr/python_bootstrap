@@ -1,5 +1,9 @@
 .PHONY: clean test build
 VENV_DIR=venv
+RED=`tput setaf 1`
+GREEN=`tput setaf 2`
+YELLOW=`tput setaf 3`
+RESET=`tput sgr0`
 
 clean:
 	@find . -name "*.pyc" -exec rm -rf {} \;
@@ -7,14 +11,14 @@ clean:
 
 build:
 	@echo "Building project"
-	@echo "Checking for previous virtual environment"
+	@echo "${YELLOW}Checking for previous virtual environment${RESET}"
 	@if [ -d "$(VENV_DIR)" ]; then \
-		echo "Deleting previous virtual environment"; \
+		echo "${RED}Deleting previous virtual environment${RESET}"; \
 		rm -rf $(VENV_DIR); \
 	fi;
-	@echo "Creating new virtual environment"
+	@echo "${GREEN}Creating new virtual environment${RESET}"
 	@virtualenv $(VENV_DIR);
-	@echo "Installing requirements"
+	@echo "${GREEN}Installing requirements${RESET}"
 	@source $(VENV_DIR)/bin/activate; \
 	pip install -r requirements.txt; \
 	deactivate;
@@ -25,4 +29,4 @@ test:
 	@echo 'Activating virtualenv'
 	@source $(VENV_DIR)/bin/activate; \
 	python run_test.py
-	@echo 'Test finished , please check log for more information'
+	@echo "${GREEN}Test finished , please check log for more information${RESET}"
